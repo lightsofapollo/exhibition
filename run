@@ -1,0 +1,53 @@
+#! /bin/bash -e
+
+ROOT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+IOJS_VER=v1.5.1
+
+##### Configuration helpers
+
+get_iojs_os() {
+  uname -s | tr '[:upper:]' '[:lower:]'
+}
+
+get_iojs_arch() {
+  if [ "$(uname -m)" == "x86_64" ];
+  then
+    echo 'x64';
+  else
+    echo 'x86';
+  fi
+}
+
+
+# Download IOJS and return the path to the bin directory...
+download_iojs() {
+  local version=$1
+  local url="https://iojs.org/dist/$IOJS_VER/iojs-${IOJS_VER}-$(get_iojs_os)-$(get_iojs_arch).tar.gz"
+  local path="$ROOT/.iojs/$version/"
+
+  # Already installed iojs...
+  if [ -x $path/bin/iojs ];
+  then
+    echo $path/bin/
+    return
+  fi
+
+  # Install IO JS...
+  mkdir -p $path
+  cd $path
+  curl $url | tar -xz --strip-components 1
+  cd -
+
+  # Validate the install...
+  if ! $path/bin/iojs --version ;
+  then
+    echo "Error installing IO JS"
+    exit 1
+  fi
+
+  echo $path/bin/
+}
+
+##### Configuration for exhibition
+IOJS_BIN=$(download_iojs $IOJS_VER)
+PATH=$IOJS_BIN:$PATH
