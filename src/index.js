@@ -1,6 +1,8 @@
 #! /usr/bin/env node
 
-import 'babel/polyfill'
+// Register means every single file will get processed by babel that we import!
+import 'babel/register'
+
 import yaml from 'js-yaml';
 import fsPath from 'path';
 import fs from 'mz/fs';
