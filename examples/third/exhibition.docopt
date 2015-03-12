@@ -1,0 +1,12 @@
+Second Example...
+
+Usage:
+  third <attack>
+
+Options:
+  -h, --help        Show this message
+  --super-attack    Super attack!
+  --another=<value> Another thing which accepts a value...
+
+Commands:
+  third This is your third command.
