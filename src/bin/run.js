@@ -6,7 +6,7 @@ import 'babel/register'
 import yaml from 'js-yaml';
 import fsPath from 'path';
 import fs from 'mz/fs';
-import createCommands from './commands';
+import createCommands from '../commands';
 
 const CONFIG = 'exhibition.yml';
 

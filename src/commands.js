@@ -124,7 +124,7 @@ class Commands {
 
     let doc = await fs.readFile(command.docopt.path, 'utf8');
     let docoptParsed = docopt(doc, {
-      argv: argv
+      argv: argv.slice(1)
     });
 
     let mod = require(command.cli);
