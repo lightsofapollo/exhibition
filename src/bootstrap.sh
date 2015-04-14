@@ -1,10 +1,10 @@
 #! /bin/bash -e
 
-IOJS_VER=v1.5.1
 
 ROOT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-IOJS_PATH=$ROOT/.iojs/$IOJS_VER/
+IOJS_PATH=$ROOT/.exhibition/iojs/$IOJS_VER/
 NPM_HASH_FILE=$ROOT/node_modules/.exhibition.md5
+IOJS_VER=$(cat $ROOT/.exhibition/iojs_version)
 
 ##### Configuration helpers
 
@@ -91,4 +91,4 @@ PATH=$IOJS_PATH/bin:$PATH
 npm_install
 
 ##### Your Command stuff with the clean node environment...
-exec node $ROOT/build/index.js $ROOT/examples $@
+exec node $ROOT/node_modules/.bin/exhibition $ROOT $@
